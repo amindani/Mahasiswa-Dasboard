@@ -13,9 +13,20 @@ const materiKuliah = [
   //   deskripsi: "Ringkasan materi pertemuan pertama.",
   //   file: "assets/pengantar-pemrograman.pdf",
   //   tipe: "PDF"
-  // judul: "tesst111"
-  // file: "assets/240511021_Muhammad Amin Ramdani_TI23B_IMK.pdf"
-  // tipe: "PDF"
+  ```javascript
+const materiKuliah = [
+  {
+    judul: "Tugas IMK",
+    mataKuliah: "Interaksi Manusia dan Komputer",
+    tanggal: "2026-10-24",
+    deskripsi: "Dokumen tugas mata kuliah Interaksi Manusia dan Komputer.",
+    file: "assets/240511021_Muhammad Amin Ramdani_TI23B_IMK.pdf",
+    tipe: "PDF"
+  }
+];
+
+const tugasKuliah = [];
+```
   // }
 ];
 
