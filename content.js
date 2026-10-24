@@ -13,6 +13,9 @@ const materiKuliah = [
   //   deskripsi: "Ringkasan materi pertemuan pertama.",
   //   file: "assets/pengantar-pemrograman.pdf",
   //   tipe: "PDF"
+  // judul: "tesst111"
+  // file: "assets/240511021_Muhammad Amin Ramdani_TI23B_IMK.pdf"
+  // tipe: "PDF"
   // }
 ];
 
