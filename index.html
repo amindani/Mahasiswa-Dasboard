@@ -18,11 +18,11 @@
     <style>
         /* FOTO PROFIL SIDEBAR */
         .profile-mini .avatar {
-            width: 43px;
-            height: 43px;
+            width: 43px !important;
+            height: 43px !important;
             min-width: 43px;
-            max-width: 43px;
             min-height: 43px;
+            max-width: 43px;
             max-height: 43px;
             padding: 0;
             overflow: hidden;
@@ -46,7 +46,7 @@
         .profile-mini .profile-name strong {
             display: block;
             font-size: 11px;
-            line-height: 1.45;
+            line-height: 1.5;
         }
 
         .profile-mini .profile-name span {
@@ -57,11 +57,11 @@
 
         /* FOTO PROFIL UTAMA */
         .profile-banner .large-avatar {
-            width: 65px;
-            height: 65px;
+            width: 65px !important;
+            height: 65px !important;
             min-width: 65px;
-            max-width: 65px;
             min-height: 65px;
+            max-width: 65px;
             max-height: 65px;
             padding: 0;
             overflow: hidden;
@@ -77,84 +77,155 @@
             border-radius: 50%;
         }
 
-        /* LOGO KAMPUS */
         .brand-mark img {
-            display: block;
             width: 100%;
             height: 100%;
             object-fit: contain;
             padding: 5px;
         }
 
-        /* TOMBOL DOKUMEN */
-        .document-button {
+        /* BAGIAN PENCARIAN DOKUMEN */
+        .filter-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 450px;
+            padding: 12px 15px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--surface);
+        }
+
+        .search-box .material-icons-sharp {
+            font-size: 20px;
+            color: var(--muted);
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .result-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* TOMBOL LIHAT DAN DOWNLOAD */
+        .document-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .document-actions .document-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             padding: 9px 12px;
             border-radius: 8px;
-            background: var(--primary-soft);
-            color: var(--primary);
+            text-decoration: none;
             font-size: 11px;
             font-weight: 700;
-            border: none;
+            white-space: nowrap;
             cursor: pointer;
         }
 
-        .document-button .material-icons-sharp {
+        .document-actions .view-button {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        .document-actions .download-button {
+            background: var(--primary);
+            color: white;
+        }
+
+        .document-actions .document-button .material-icons-sharp {
             font-size: 17px;
         }
 
-        .document-button:hover {
-            opacity: 0.8;
-        }
-
-        /* NAMA FILE */
-        .post-card h3 {
+        .post-card h3,
+        .post-description {
             overflow-wrap: anywhere;
             word-break: break-word;
         }
 
-        .post-description {
-            overflow-wrap: anywhere;
-        }
-
-        /* IKON FILE */
         .file-icon {
             flex-shrink: 0;
         }
 
-        /* PESAN ERROR */
-        .error-message {
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.8;
+        .empty-state {
+            padding: 35px 20px;
+            text-align: center;
+            grid-column: 1 / -1;
         }
 
-        .error-message a {
+        .empty-icon {
+            margin-bottom: 12px;
+        }
+
+        .empty-icon .material-icons-sharp {
+            font-size: 40px;
+            color: var(--muted);
+        }
+
+        .empty-state h3 {
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .empty-state a {
             color: var(--primary);
             font-weight: 700;
         }
 
-        /* TAMPILAN HP */
         @media (max-width: 580px) {
-            .profile-details {
-                grid-template-columns: 1fr;
+            .filter-row {
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: none;
             }
 
             .profile-banner .large-avatar {
-                width: 55px;
-                height: 55px;
+                width: 55px !important;
+                height: 55px !important;
                 min-width: 55px;
-                max-width: 55px;
                 min-height: 55px;
+                max-width: 55px;
                 max-height: 55px;
                 flex-basis: 55px;
             }
 
-            .filter-row {
-                align-items: center;
+            .document-actions .document-button {
+                flex: 1;
             }
         }
     </style>
@@ -166,7 +237,6 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="brand">
-
             <div class="brand-mark">
                 <img src="images/logo.png" alt="Logo Universitas">
             </div>
@@ -175,12 +245,10 @@
                 Universitas Muhammadiyah Cirebon
                 <small>PORTOFOLIO AKADEMIK</small>
             </div>
-
         </div>
 
-        <!-- FOTO DAN NAMA MAHASISWA -->
+        <!-- PROFIL SINGKAT -->
         <div class="profile-mini">
-
             <div class="avatar">
                 <img
                     src="assets/foto-profil.jpg"
@@ -192,12 +260,10 @@
                 <strong>Muhammad Amin Ramdani</strong>
                 <span>Mahasiswa</span>
             </div>
-
         </div>
 
         <!-- MENU NAVIGASI -->
         <nav class="nav-menu">
-
             <a href="#beranda" class="nav-link active">
                 <span class="material-icons-sharp">dashboard</span>
                 <span>Beranda</span>
@@ -217,19 +283,16 @@
                 <span class="material-icons-sharp">info</span>
                 <span>Informasi</span>
             </a>
-
         </nav>
 
         <!-- INFORMASI KAMPUS -->
         <div class="sidebar-bottom">
-
             <span class="material-icons-sharp">school</span>
 
             <div>
                 <strong>Teknik Informatika</strong>
                 <small>Universitas Muhammadiyah Cirebon</small>
             </div>
-
         </div>
 
     </aside>
@@ -239,7 +302,6 @@
 
         <!-- HEADER -->
         <header class="topbar">
-
             <div style="display:flex;align-items:center;gap:10px;">
 
                 <button
@@ -255,11 +317,9 @@
                     Dashboard <span>/</span>
                     <strong>Beranda</strong>
                 </div>
-
             </div>
 
             <div class="topbar-actions">
-
                 <div class="status-pill">
                     <i></i>
                     Mahasiswa
@@ -273,16 +333,12 @@
                 >
                     <span class="material-icons-sharp">dark_mode</span>
                 </button>
-
             </div>
-
         </header>
 
         <!-- KARTU SAMBUTAN -->
         <section class="welcome-card">
-
             <div class="welcome-copy">
-
                 <span class="eyebrow">PORTOFOLIO AKADEMIK</span>
 
                 <h1>
@@ -297,7 +353,6 @@
                 </p>
 
                 <div class="welcome-tags">
-
                     <span>
                         <i class="material-icons-sharp">school</i>
                         Teknik Informatika
@@ -307,13 +362,10 @@
                         <i class="material-icons-sharp">badge</i>
                         240511021
                     </span>
-
                 </div>
-
             </div>
 
             <div class="welcome-art">
-
                 <div class="art-circle circle-one"></div>
                 <div class="art-circle circle-two"></div>
 
@@ -322,37 +374,29 @@
                 </span>
 
                 <div class="floating-note">
-
                     <span class="material-icons-sharp">verified</span>
 
                     <div>
                         <strong>Portofolio Mahasiswa</strong>
                         <small>Teknik Informatika</small>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
-        <!-- INFORMASI AKADEMIK -->
+        <!-- RINGKASAN AKADEMIK -->
         <section id="informasi">
-
             <div class="section-heading overview-heading">
-
                 <div>
                     <span class="eyebrow">RINGKASAN</span>
                     <h2>Informasi Akademik</h2>
                     <p>Informasi dasar mahasiswa.</p>
                 </div>
-
             </div>
 
             <div class="stats-grid">
 
                 <article class="stat-card">
-
                     <div class="stat-icon purple">
                         <span class="material-icons-sharp">badge</span>
                     </div>
@@ -366,11 +410,9 @@
                     <span class="material-icons-sharp stat-decoration">
                         badge
                     </span>
-
                 </article>
 
                 <article class="stat-card">
-
                     <div class="stat-icon orange">
                         <span class="material-icons-sharp">school</span>
                     </div>
@@ -384,11 +426,9 @@
                     <span class="material-icons-sharp stat-decoration">
                         school
                     </span>
-
                 </article>
 
                 <article class="stat-card">
-
                     <div class="stat-icon green">
                         <span class="material-icons-sharp">account_balance</span>
                     </div>
@@ -402,18 +442,14 @@
                     <span class="material-icons-sharp stat-decoration">
                         account_balance
                     </span>
-
                 </article>
 
             </div>
-
         </section>
 
         <!-- PROFIL MAHASISWA -->
         <section class="content-section profile-section" id="profil">
-
             <div class="section-heading">
-
                 <div>
                     <span class="eyebrow">IDENTITAS</span>
                     <h2>Profil Mahasiswa</h2>
@@ -424,13 +460,11 @@
                     <span class="material-icons-sharp">person</span>
                     Profil Saya
                 </span>
-
             </div>
 
             <div class="profile-card">
 
                 <div class="profile-banner">
-
                     <div class="large-avatar">
                         <img
                             src="assets/foto-profil.jpg"
@@ -439,108 +473,80 @@
                     </div>
 
                     <div>
-
                         <span class="profile-label">MAHASISWA</span>
-
                         <h3>Muhammad Amin Ramdani</h3>
-
                         <p>
                             Teknik Informatika · Universitas Muhammadiyah Cirebon
                         </p>
-
                     </div>
-
                 </div>
 
                 <div class="profile-details">
 
                     <div class="detail-item">
-
                         <span class="material-icons-sharp">badge</span>
-
                         <div>
                             <small>Nomor Induk Mahasiswa</small>
                             <strong>240511021</strong>
                         </div>
-
                     </div>
 
                     <div class="detail-item">
-
                         <span class="material-icons-sharp">school</span>
-
                         <div>
                             <small>Program Studi</small>
                             <strong>Teknik Informatika</strong>
                         </div>
-
                     </div>
 
                     <div class="detail-item">
-
                         <span class="material-icons-sharp">calendar_month</span>
-
                         <div>
                             <small>Tanggal Lahir</small>
                             <strong>5 Oktober 2005</strong>
                         </div>
-
                     </div>
 
                     <div class="detail-item">
-
                         <span class="material-icons-sharp">email</span>
-
                         <div>
                             <small>Email</small>
-
                             <strong>
                                 <a href="mailto:amindani217@gmail.com">
                                     amindani217@gmail.com
                                 </a>
                             </strong>
                         </div>
-
                     </div>
 
                     <div class="detail-item">
-
                         <span class="material-icons-sharp">location_on</span>
-
                         <div>
                             <small>Alamat</small>
                             <strong>Ciperna, Talun, Cirebon, Jawa Barat</strong>
                         </div>
-
                     </div>
 
                     <div class="detail-item">
-
                         <span class="material-icons-sharp">account_balance</span>
-
                         <div>
                             <small>Universitas</small>
                             <strong>Universitas Muhammadiyah Cirebon</strong>
                         </div>
-
                     </div>
 
                 </div>
-
             </div>
-
         </section>
 
-        <!-- DOKUMEN OTOMATIS -->
+        <!-- ARSIP AKADEMIK: MATERI & TUGAS -->
         <section class="content-section" id="dokumen">
-
             <div class="section-heading">
-
                 <div>
                     <span class="eyebrow">ARSIP AKADEMIK</span>
                     <h2>Materi & Tugas</h2>
                     <p>
-                        Daftar file dari folder assets repository GitHub.
+                        Pilih dokumen untuk melihat atau mengunduh file.
                     </p>
                 </div>
 
@@ -548,14 +554,11 @@
                     <span class="material-icons-sharp">folder_open</span>
                     Dokumen
                 </span>
-
             </div>
 
             <!-- PENCARIAN -->
             <div class="filter-row">
-
                 <label class="search-box">
-
                     <span class="material-icons-sharp">search</span>
 
                     <input
@@ -563,20 +566,16 @@
                         id="searchDocument"
                         placeholder="Cari nama materi atau tugas..."
                     >
-
                 </label>
 
                 <span class="result-label" id="documentCount">
                     Memuat dokumen...
                 </span>
-
             </div>
 
-            <!-- DAFTAR FILE -->
+            <!-- KARTU DOKUMEN DIBUAT OTOMATIS -->
             <div class="post-grid" id="documentList">
-
                 <div class="empty-state">
-
                     <div class="empty-icon">
                         <span class="material-icons-sharp">
                             hourglass_empty
@@ -584,32 +583,23 @@
                     </div>
 
                     <h3>Memuat dokumen</h3>
-
                     <p>Mohon tunggu sebentar...</p>
-
                 </div>
-
             </div>
-
         </section>
 
         <!-- FOOTER -->
         <footer class="footer">
-
             <span>© 2026 Muhammad Amin Ramdani</span>
-
-            <span>
-                Portofolio Akademik · Teknik Informatika
-            </span>
-
+            <span>Portofolio Akademik · Teknik Informatika</span>
         </footer>
 
     </main>
 
     <script>
-        /* =====================================
-           PENGATURAN TEMA
-        ===================================== */
+        /* ======================================
+           TEMA TERANG DAN GELAP
+        ====================================== */
 
         const themeToggle = document.getElementById("themeToggle");
 
@@ -620,13 +610,14 @@
                 ".material-icons-sharp"
             );
 
-            if (document.body.classList.contains("dark-theme")) {
-                icon.textContent = "light_mode";
-                localStorage.setItem("dashboard-theme", "dark");
-            } else {
-                icon.textContent = "dark_mode";
-                localStorage.setItem("dashboard-theme", "light");
-            }
+            const isDark = document.body.classList.contains("dark-theme");
+
+            icon.textContent = isDark ? "light_mode" : "dark_mode";
+
+            localStorage.setItem(
+                "dashboard-theme",
+                isDark ? "dark" : "light"
+            );
         });
 
         if (localStorage.getItem("dashboard-theme") === "dark") {
@@ -638,9 +629,9 @@
         }
 
 
-        /* =====================================
-           MENU SIDEBAR MOBILE
-        ===================================== */
+        /* ======================================
+           MENU UNTUK LAYAR HP
+        ====================================== */
 
         const mobileMenu = document.getElementById("mobileMenu");
         const sidebar = document.getElementById("sidebar");
@@ -661,9 +652,9 @@
         });
 
 
-        /* =====================================
-           KONFIGURASI DOKUMEN GITHUB
-        ===================================== */
+        /* ======================================
+           KONFIGURASI GITHUB
+        ====================================== */
 
         const documentList = document.getElementById("documentList");
         const documentCount = document.getElementById("documentCount");
@@ -690,9 +681,9 @@
         let allDocuments = [];
 
 
-        /* =====================================
-           FUNGSI FORMAT FILE
-        ===================================== */
+        /* ======================================
+           FUNGSI FILE
+        ====================================== */
 
         function getFileExtension(filename) {
             const index = filename.lastIndexOf(".");
@@ -743,58 +734,61 @@
                 return (bytes / 1024).toFixed(1) + " KB";
             }
 
-            return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+            return (bytes / (1024 * 1024)).toFixed(2) + " MB";
         }
 
 
-        /* =====================================
+        /* ======================================
            MEMBUAT KARTU DOKUMEN
-        ===================================== */
+        ====================================== */
 
         function renderDocuments(documents) {
             documentList.innerHTML = "";
 
             if (documents.length === 0) {
                 const empty = document.createElement("div");
-
                 empty.className = "empty-state";
 
-                empty.innerHTML = `
-                    <div class="empty-icon">
-                        <span class="material-icons-sharp">
-                            folder_off
-                        </span>
-                    </div>
+                const emptyIcon = document.createElement("div");
+                emptyIcon.className = "empty-icon";
 
-                    <h3>Dokumen tidak ditemukan</h3>
+                const icon = document.createElement("span");
+                icon.className = "material-icons-sharp";
+                icon.textContent = "folder_off";
 
-                    <p>
-                        Tidak ada file yang cocok dengan pencarian.
-                    </p>
-                `;
+                emptyIcon.appendChild(icon);
+
+                const heading = document.createElement("h3");
+                heading.textContent = "Dokumen tidak ditemukan";
+
+                const message = document.createElement("p");
+                message.textContent =
+                    "Tidak ada file yang sesuai dengan pencarian.";
+
+                empty.appendChild(emptyIcon);
+                empty.appendChild(heading);
+                empty.appendChild(message);
 
                 documentList.appendChild(empty);
-
                 documentCount.textContent = "0 dokumen";
 
                 return;
             }
 
-            documentCount.textContent =
-                documents.length + " dokumen";
+            documentCount.textContent = documents.length + " dokumen";
 
             documents.forEach(function (file) {
                 const extension = getFileExtension(file.name);
 
-                const title = file.name.substring(
-                    0,
-                    file.name.lastIndexOf(".")
-                );
+                const dotIndex = file.name.lastIndexOf(".");
+                const title = dotIndex > 0
+                    ? file.name.substring(0, dotIndex)
+                    : file.name;
 
                 const card = document.createElement("article");
                 card.className = "post-card";
 
-                /* Bagian atas kartu */
+                /* Ikon dan label format */
                 const top = document.createElement("div");
                 top.className = "post-card-top";
 
@@ -814,7 +808,7 @@
                 top.appendChild(iconBox);
                 top.appendChild(badge);
 
-                /* Keterangan file */
+                /* Kategori */
                 const meta = document.createElement("div");
                 meta.className = "post-meta";
 
@@ -823,16 +817,16 @@
                 metaIcon.textContent = "folder";
 
                 const metaText = document.createElement("span");
-                metaText.textContent = "Folder assets";
+                metaText.textContent = "Materi & Tugas";
 
                 meta.appendChild(metaIcon);
                 meta.appendChild(metaText);
 
-                /* Nama dokumen */
+                /* Nama file */
                 const heading = document.createElement("h3");
                 heading.textContent = title;
 
-                /* Deskripsi dokumen */
+                /* Deskripsi */
                 const description = document.createElement("p");
                 description.className = "post-description";
 
@@ -840,51 +834,79 @@
 
                 description.textContent =
                     "Format " + extension.toUpperCase() +
-                    (size ? " · Ukuran " + size : "") +
-                    ". File materi atau tugas mahasiswa.";
+                    (size ? " · " + size : "");
 
-                /* Bagian bawah kartu */
+                /* Tombol */
                 const bottom = document.createElement("div");
-                bottom.className = "post-card-bottom";
-
-                const link = document.createElement("a");
-                link.className = "document-button";
+                bottom.className = "post-card-bottom document-actions";
 
                 /*
-                 * PDF dapat dibuka melalui GitHub.
-                 * File lain diarahkan ke unduhan langsung.
+                 * TOMBOL LIHAT
+                 *
+                 * PDF: buka preview GitHub.
+                 * TXT: buka teks secara langsung.
+                 * DOC/DOCX/PPT/PPTX/XLS/XLSX:
+                 * gunakan Microsoft Office Online.
+                 * ZIP: buka halaman file di GitHub.
                  */
+
+                const viewButton = document.createElement("a");
+                viewButton.className = "document-button view-button";
+                viewButton.target = "_blank";
+                viewButton.rel = "noopener noreferrer";
+
+                const viewIcon = document.createElement("span");
+                viewIcon.className = "material-icons-sharp";
+                viewIcon.textContent = "visibility";
+
+                const viewText = document.createElement("span");
+                viewText.textContent = "Lihat";
+
+                viewButton.appendChild(viewIcon);
+                viewButton.appendChild(viewText);
+
                 if (extension === "pdf") {
-                    link.href = file.html_url;
-                    link.target = "_blank";
-                    link.rel = "noopener noreferrer";
+                    viewButton.href = file.html_url;
+                } else if (extension === "txt") {
+                    viewButton.href = file.download_url || file.html_url;
+                } else if (
+                    ["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(extension)
+                ) {
+                    viewButton.href =
+                        "https://view.officeapps.live.com/op/view.aspx?src=" +
+                        encodeURIComponent(file.download_url);
                 } else {
-                    link.href = file.download_url || file.html_url;
-                    link.download = file.name;
+                    viewButton.href = file.html_url;
                 }
 
-                const linkIcon = document.createElement("span");
-                linkIcon.className = "material-icons-sharp";
+                /*
+                 * TOMBOL DOWNLOAD
+                 */
 
-                linkIcon.textContent =
-                    extension === "pdf" ? "open_in_new" : "download";
+                const downloadButton = document.createElement("a");
+                downloadButton.className =
+                    "document-button download-button";
 
-                const linkText = document.createElement("span");
+                downloadButton.href =
+                    file.download_url || file.html_url;
 
-                linkText.textContent =
-                    extension === "pdf" ? "Buka PDF" : "Unduh File";
+                downloadButton.setAttribute("download", file.name);
+                downloadButton.rel = "noopener noreferrer";
 
-                link.appendChild(linkIcon);
-                link.appendChild(linkText);
+                const downloadIcon = document.createElement("span");
+                downloadIcon.className = "material-icons-sharp";
+                downloadIcon.textContent = "download";
 
-                const status = document.createElement("span");
-                status.className = "post-status";
-                status.textContent = "Tersedia";
+                const downloadText = document.createElement("span");
+                downloadText.textContent = "Download";
 
-                bottom.appendChild(link);
-                bottom.appendChild(status);
+                downloadButton.appendChild(downloadIcon);
+                downloadButton.appendChild(downloadText);
 
-                /* Gabungkan seluruh bagian */
+                bottom.appendChild(viewButton);
+                bottom.appendChild(downloadButton);
+
+                /* Gabungkan kartu */
                 card.appendChild(top);
                 card.appendChild(meta);
                 card.appendChild(heading);
@@ -896,9 +918,9 @@
         }
 
 
-        /* =====================================
-           MEMBACA FOLDER ASSETS DARI GITHUB
-        ===================================== */
+        /* ======================================
+           MEMUAT FILE DARI FOLDER ASSETS
+        ====================================== */
 
         async function loadDocuments() {
             documentCount.textContent = "Memuat dokumen...";
@@ -912,16 +934,14 @@
 
                 if (!response.ok) {
                     throw new Error(
-                        "GitHub API memberikan status " + response.status
+                        "GitHub API error: " + response.status
                     );
                 }
 
                 const files = await response.json();
 
                 if (!Array.isArray(files)) {
-                    throw new Error(
-                        "Data folder assets tidak valid."
-                    );
+                    throw new Error("Daftar file tidak valid.");
                 }
 
                 allDocuments = files
@@ -938,10 +958,7 @@
                 renderDocuments(allDocuments);
 
             } catch (error) {
-                console.error(
-                    "Gagal memuat dokumen dari GitHub:",
-                    error
-                );
+                console.error("Gagal memuat dokumen:", error);
 
                 documentCount.textContent = "Gagal memuat";
 
@@ -963,21 +980,19 @@
                 heading.textContent = "Dokumen gagal dimuat";
 
                 const message = document.createElement("p");
-                message.className = "error-message";
                 message.textContent =
-                    "Periksa koneksi internet, status repository, " +
-                    "dan ketersediaan GitHub API. Kamu tetap bisa " +
-                    "melihat file langsung melalui GitHub.";
+                    "Pastikan repository publik, koneksi internet aktif, " +
+                    "dan GitHub API bisa diakses.";
 
-                const githubLink = document.createElement("a");
-                githubLink.href = githubAssetsPage;
-                githubLink.target = "_blank";
-                githubLink.rel = "noopener noreferrer";
-                githubLink.textContent = "Buka folder assets di GitHub";
+                const link = document.createElement("a");
+                link.href = githubAssetsPage;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = "Buka folder assets di GitHub";
 
                 const linkContainer = document.createElement("p");
                 linkContainer.style.marginTop = "12px";
-                linkContainer.appendChild(githubLink);
+                linkContainer.appendChild(link);
 
                 errorCard.appendChild(iconBox);
                 errorCard.appendChild(heading);
@@ -989,9 +1004,9 @@
         }
 
 
-        /* =====================================
+        /* ======================================
            PENCARIAN DOKUMEN
-        ===================================== */
+        ====================================== */
 
         searchDocument.addEventListener("input", function () {
             const keyword = searchDocument.value
@@ -1008,9 +1023,9 @@
         });
 
 
-        /* =====================================
+        /* ======================================
            JALANKAN SAAT HALAMAN DIBUKA
-        ===================================== */
+        ====================================== */
 
         loadDocuments();
     </script>
