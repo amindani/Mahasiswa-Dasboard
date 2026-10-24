@@ -5,15 +5,7 @@
   misalnya: "assets/materi-pertemuan-1.pdf". Setelah itu commit/push ke GitHub.
 */
 const materiKuliah = [
-  // Contoh format:
-  // {
-  //   judul: "Pengantar Pemrograman",
-  //   mataKuliah: "Algoritma dan Pemrograman",
-  //   tanggal: "2026-10-24",
-  //   deskripsi: "Ringkasan materi pertemuan pertama.",
-  //   file: "assets/pengantar-pemrograman.pdf",
-  //   tipe: "PDF"
-  ```javascript
+```javascript
 const materiKuliah = [
   {
     judul: "Tugas IMK",
@@ -27,7 +19,6 @@ const materiKuliah = [
 
 const tugasKuliah = [];
 ```
-  // }
 ];
 
 const tugasKuliah = [
