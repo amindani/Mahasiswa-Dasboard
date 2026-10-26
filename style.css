@@ -80,3 +80,103 @@
 .document-actions .document-button .material-icons-sharp {
     font-size: 17px;
 }
+
+/* =====================================================
+   VIDEO BACKGROUND (bg.mp4 di folder utama repository)
+   ===================================================== */
+html {
+    min-height: 100%;
+    background: #0b0e15;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: transparent !important;
+    position: relative;
+    isolation: isolate;
+}
+
+#bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+    pointer-events: none;
+    background: #0b0e15;
+}
+
+#bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: rgba(8, 12, 24, 0.48);
+}
+
+/* Elemen utama dibuat sedikit transparan supaya video tetap terlihat. */
+.sidebar {
+    background: rgba(255, 255, 255, 0.86);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+.main-content {
+    background: transparent;
+}
+
+.topbar {
+    background: transparent;
+}
+
+.stat-card,
+.post-card,
+.empty-state,
+.profile-card,
+.status-pill,
+.icon-button,
+.search-box {
+    background-color: rgba(255, 255, 255, 0.86);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.sidebar-bottom {
+    background: rgba(245, 247, 252, 0.78);
+}
+
+.profile-banner {
+    background: rgba(238, 240, 255, 0.82);
+}
+
+/* Mode gelap tetap nyaman dibaca di atas video. */
+.dark-theme .sidebar {
+    background: rgba(29, 35, 48, 0.88);
+}
+
+.dark-theme .stat-card,
+.dark-theme .post-card,
+.dark-theme .empty-state,
+.dark-theme .profile-card,
+.dark-theme .status-pill,
+.dark-theme .icon-button,
+.dark-theme .search-box {
+    background-color: rgba(29, 35, 48, 0.88);
+}
+
+.dark-theme .sidebar-bottom {
+    background: rgba(21, 25, 35, 0.82);
+}
+
+.dark-theme .profile-banner {
+    background: rgba(41, 45, 73, 0.88);
+}
+
+/* Kurangi animasi untuk pengguna yang mengaktifkan pengaturan ini. */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
