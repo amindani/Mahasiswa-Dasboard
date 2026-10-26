@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Mahasiswa - Muhammad Amin Ramdani</title>
+
+    <link rel="shortcut icon" href="images/logo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* FOTO PROFIL SIDEBAR */
+        .profile-mini .avatar {
+            width: 43px !important;
+            height: 43px !important;
+            min-width: 43px;
+            min-height: 43px;
+            max-width: 43px;
+            max-height: 43px;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 50%;
+            flex: 0 0 43px;
+        }
+
+        .profile-mini .avatar img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-mini .profile-name {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-mini .profile-name strong {
+            display: block;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .profile-mini .profile-name span {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* FOTO PROFIL UTAMA */
+        .profile-banner .large-avatar {
+            width: 65px !important;
+            height: 65px !important;
+            min-width: 65px;
+            min-height: 65px;
+            max-width: 65px;
+            max-height: 65px;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 50%;
+            flex: 0 0 65px;
+        }
+
+        .profile-banner .large-avatar img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        /* BAGIAN PENCARIAN DOKUMEN */
+        .filter-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 450px;
+            padding: 12px 15px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--surface);
+        }
+
+        .search-box .material-icons-sharp {
+            font-size: 20px;
+            color: var(--muted);
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .result-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* TOMBOL LIHAT DAN DOWNLOAD */
+        .document-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .document-actions .document-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .document-actions .view-button {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        .document-actions .download-button {
+            background: var(--primary);
+            color: white;
+        }
+
+        .document-actions .document-button .material-icons-sharp {
+            font-size: 17px;
+        }
+
+        .post-card h3,
+        .post-description {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .file-icon {
+            flex-shrink: 0;
+        }
+
+        .empty-state {
+            padding: 35px 20px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .empty-icon {
+            margin-bottom: 12px;
+        }
+
+        .empty-icon .material-icons-sharp {
+            font-size: 40px;
+            color: var(--muted);
+        }
+
+        .empty-state h3 {
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .empty-state a {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        @media (max-width: 580px) {
+            .filter-row {
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+
+            .profile-banner .large-avatar {
+                width: 55px !important;
+                height: 55px !important;
+                min-width: 55px;
+                min-height: 55px;
+                max-width: 55px;
+                max-height: 55px;
+                flex-basis: 55px;
+            }
+
+            .document-actions .document-button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <img src="images/logo.png" alt="Logo Universitas">
+            </div>
+
+            <div class="brand-text">
+                Universitas Muhammadiyah Cirebon
+                <small>PORTOFOLIO AKADEMIK</small>
+            </div>
+        </div>
+
+        <!-- PROFIL SINGKAT -->
+        <div class="profile-mini">
+            <div class="avatar">
+                <img
+                    src="assets/foto-profil.jpg"
+                    alt="Foto Muhammad Amin Ramdani"
+                >
+            </div>
+
+            <div class="profile-name">
+                <strong>Muhammad Amin Ramdani</strong>
+                <span>Mahasiswa</span>
+            </div>
+        </div>
+
+        <!-- MENU NAVIGASI -->
+        <nav class="nav-menu">
+            <a href="#beranda" class="nav-link active">
+                <span class="material-icons-sharp">dashboard</span>
+                <span>Beranda</span>
+            </a>
+
+            <a href="#profil" class="nav-link">
+                <span class="material-icons-sharp">person</span>
+                <span>Profil Saya</span>
+            </a>
+
+            <a href="#dokumen" class="nav-link">
+                <span class="material-icons-sharp">folder</span>
+                <span>Materi & Tugas</span>
+            </a>
+
+            <a href="#informasi" class="nav-link">
+                <span class="material-icons-sharp">info</span>
+                <span>Informasi</span>
+            </a>
+            <a href="admin.html" class="nav-link"><span class="material-icons-sharp">admin_panel_settings</span><span>Admin Upload</span></a>
+        </nav>
+
+        <!-- INFORMASI KAMPUS -->
+        <div class="sidebar-bottom">
+            <span class="material-icons-sharp">school</span>
+
+            <div>
+                <strong>Teknik Informatika</strong>
+                <small>Universitas Muhammadiyah Cirebon</small>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-content" id="beranda">
+
+        <!-- HEADER -->
+        <header class="topbar">
+            <div style="display:flex;align-items:center;gap:10px;">
+
+                <button
+                    class="icon-button mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Buka menu"
+                >
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+
+                <div class="breadcrumb">
+                    Dashboard <span>/</span>
+                    <strong>Beranda</strong>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <div class="status-pill">
+                    <i></i>
+                    Mahasiswa
+                </div>
+
+                <button
+                    class="icon-button"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Ganti tema"
+                >
+                    <span class="material-icons-sharp">dark_mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- KARTU SAMBUTAN -->
+        <section class="welcome-card">
+            <div class="welcome-copy">
+                <span class="eyebrow">PORTOFOLIO AKADEMIK</span>
+
+                <h1>
+                    Selamat Datang,<br>
+                    <span>Muhammad Amin Ramdani!</span>
+                </h1>
+
+                <p>
+                    Selamat datang di dashboard portofolio akademik saya.
+                    Halaman ini berisi informasi profil mahasiswa serta
+                    kumpulan materi dan tugas perkuliahan.
+                </p>
+
+                <div class="welcome-tags">
+                    <span>
+                        <i class="material-icons-sharp">school</i>
+                        Teknik Informatika
+                    </span>
+
+                    <span>
+                        <i class="material-icons-sharp">badge</i>
+                        240511021
+                    </span>
+                </div>
+            </div>
+
+            <div class="welcome-art">
+                <div class="art-circle circle-one"></div>
+                <div class="art-circle circle-two"></div>
+
+                <span class="material-icons-sharp art-icon">
+                    account_balance
+                </span>
+
+                <div class="floating-note">
+                    <span class="material-icons-sharp">verified</span>
+
+                    <div>
+                        <strong>Portofolio Mahasiswa</strong>
+                        <small>Teknik Informatika</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RINGKASAN AKADEMIK -->
+        <section id="informasi">
+            <div class="section-heading overview-heading">
+                <div>
+                    <span class="eyebrow">RINGKASAN</span>
+                    <h2>Informasi Akademik</h2>
+                    <p>Informasi dasar mahasiswa.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon purple">
+                        <span class="material-icons-sharp">badge</span>
+                    </div>
+
+                    <div>
+                        <span class="stat-label">Nomor Induk Mahasiswa</span>
+                        <h3>240511021</h3>
+                        <small>NIM mahasiswa</small>
+                    </div>
+
+                    <span class="material-icons-sharp stat-decoration">
+                        badge
+                    </span>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">
+                        <span class="material-icons-sharp">school</span>
+                    </div>
+
+                    <div>
+                        <span class="stat-label">Program Studi</span>
+                        <h3 class="program-title">Teknik Informatika</h3>
+                        <small>Program studi mahasiswa</small>
+                    </div>
+
+                    <span class="material-icons-sharp stat-decoration">
+                        school
+                    </span>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">
+                        <span class="material-icons-sharp">account_balance</span>
+                    </div>
+
+                    <div>
+                        <span class="stat-label">Universitas</span>
+                        <h3 class="program-title">UMC</h3>
+                        <small>Universitas Muhammadiyah Cirebon</small>
+                    </div>
+
+                    <span class="material-icons-sharp stat-decoration">
+                        account_balance
+                    </span>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- PROFIL MAHASISWA -->
+        <section class="content-section profile-section" id="profil">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">IDENTITAS</span>
+                    <h2>Profil Mahasiswa</h2>
+                    <p>Informasi pribadi dan akademik.</p>
+                </div>
+
+                <span class="section-badge">
+                    <span class="material-icons-sharp">person</span>
+                    Profil Saya
+                </span>
+            </div>
+
+            <div class="profile-card">
+
+                <div class="profile-banner">
+                    <div class="large-avatar">
+                        <img
+                            src="assets/foto-profil.jpg"
+                            alt="Foto Muhammad Amin Ramdani"
+                        >
+                    </div>
+
+                    <div>
+                        <span class="profile-label">MAHASISWA</span>
+                        <h3>Muhammad Amin Ramdani</h3>
+                        <p>
+                            Teknik Informatika · Universitas Muhammadiyah Cirebon
+                        </p>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+
+                    <div class="detail-item">
+                        <span class="material-icons-sharp">badge</span>
+                        <div>
+                            <small>Nomor Induk Mahasiswa</small>
+                            <strong>240511021</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="material-icons-sharp">school</span>
+                        <div>
+                            <small>Program Studi</small>
+                            <strong>Teknik Informatika</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="material-icons-sharp">calendar_month</span>
+                        <div>
+                            <small>Tanggal Lahir</small>
+                            <strong>5 Oktober 2005</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="material-icons-sharp">email</span>
+                        <div>
+                            <small>Email</small>
+                            <strong>
+                                <a href="mailto:amindani217@gmail.com">
+                                    amindani217@gmail.com
+                                </a>
+                            </strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="material-icons-sharp">location_on</span>
+                        <div>
+                            <small>Alamat</small>
+                            <strong>Ciperna, Talun, Cirebon, Jawa Barat</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="material-icons-sharp">account_balance</span>
+                        <div>
+                            <small>Universitas</small>
+                            <strong>Universitas Muhammadiyah Cirebon</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ARSIP AKADEMIK: MATERI & TUGAS -->
+        <section class="content-section" id="dokumen">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">ARSIP AKADEMIK</span>
+                    <h2>Materi & Tugas</h2>
+                    <p>
+                        Pilih dokumen untuk melihat atau mengunduh file.
+                    </p>
+                </div>
+
+                <span class="section-badge orange-badge">
+                    <span class="material-icons-sharp">folder_open</span>
+                    Dokumen
+                </span>
+            </div>
+
+            <!-- PENCARIAN -->
+            <div class="filter-row">
+                <label class="search-box">
+                    <span class="material-icons-sharp">search</span>
+
+                    <input
+                        type="text"
+                        id="searchDocument"
+                        placeholder="Cari nama materi atau tugas..."
+                    >
+                </label>
+
+                <span class="result-label" id="documentCount">
+                    Memuat dokumen...
+                </span>
+            </div>
+
+            <!-- KARTU DOKUMEN DIBUAT OTOMATIS -->
+            <div class="post-grid" id="documentList">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <span class="material-icons-sharp">
+                            hourglass_empty
+                        </span>
+                    </div>
+
+                    <h3>Memuat dokumen</h3>
+                    <p>Mohon tunggu sebentar...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>© 2026 Muhammad Amin Ramdani</span>
+            <span>Portofolio Akademik · Teknik Informatika</span>
+        </footer>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script>
+        /* ======================================
+           TEMA TERANG DAN GELAP
+        ====================================== */
+
+        const themeToggle = document.getElementById("themeToggle");
+
+        themeToggle.addEventListener("click", function () {
+            document.body.classList.toggle("dark-theme");
+
+            const icon = themeToggle.querySelector(
+                ".material-icons-sharp"
+            );
+
+            const isDark = document.body.classList.contains("dark-theme");
+
+            icon.textContent = isDark ? "light_mode" : "dark_mode";
+
+            localStorage.setItem(
+                "dashboard-theme",
+                isDark ? "dark" : "light"
+            );
+        });
+
+        if (localStorage.getItem("dashboard-theme") === "dark") {
+            document.body.classList.add("dark-theme");
+
+            themeToggle.querySelector(
+                ".material-icons-sharp"
+            ).textContent = "light_mode";
+        }
+
+
+        /* ======================================
+           MENU UNTUK LAYAR HP
+        ====================================== */
+
+        const mobileMenu = document.getElementById("mobileMenu");
+        const sidebar = document.getElementById("sidebar");
+
+        mobileMenu.addEventListener("click", function () {
+            sidebar.classList.toggle("sidebar-open");
+        });
+
+        document.querySelectorAll(".nav-link").forEach(function (link) {
+            link.addEventListener("click", function () {
+                document.querySelectorAll(".nav-link").forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                link.classList.add("active");
+                sidebar.classList.remove("sidebar-open");
+            });
+        });
+
+
+        /* ======================================
+           DOKUMEN SUPABASE + FILE LAMA GITHUB
+        ====================================== */
+        const documentList = document.getElementById("documentList");
+        const documentCount = document.getElementById("documentCount");
+        const searchDocument = document.getElementById("searchDocument");
+        const githubAssetsAPI = "https://api.github.com/repos/amindani/Mahasiswa-Dasboard/contents/assets?ref=main";
+        const githubAssetsPage = "https://github.com/amindani/Mahasiswa-Dasboard/tree/main/assets";
+        const supportedExtensions = ["pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "txt", "zip"];
+        let allDocuments = [];
+
+        function getFileExtension(filename) {
+            const index = filename.lastIndexOf(".");
+            return index === -1 ? "" : filename.substring(index + 1).toLowerCase();
+        }
+        function getFileIcon(extension) {
+            if (extension === "pdf") return "picture_as_pdf";
+            if (["doc", "docx"].includes(extension)) return "description";
+            if (["ppt", "pptx"].includes(extension)) return "slideshow";
+            if (["xls", "xlsx"].includes(extension)) return "table_chart";
+            if (extension === "zip") return "folder_zip";
+            return "text_snippet";
+        }
+        function formatFileSize(bytes) {
+            if (typeof bytes !== "number") return "";
+            if (bytes < 1024) return bytes + " B";
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+        }
+        function renderDocuments(documents) {
+            documentList.innerHTML = "";
+            documentCount.textContent = documents.length + " dokumen";
+            if (!documents.length) {
+                documentList.innerHTML = `<div class="empty-state"><div class="empty-icon"><span class="material-icons-sharp">folder_off</span></div><h3>Dokumen tidak ditemukan</h3><p>Belum ada file yang cocok dengan pencarian.</p></div>`;
+                return;
+            }
+            documents.forEach(function(file) {
+                const name = file.name || file.file_name || "Dokumen";
+                const extension = getFileExtension(name);
+                const url = file.public_url || file.download_url || file.html_url || "#";
+                const card = document.createElement("article");
+                card.className = "post-card";
+                const top = document.createElement("div");
+                top.className = "post-card-top";
+                top.innerHTML = `<div class="file-icon"><span class="material-icons-sharp">${getFileIcon(extension)}</span></div><span class="file-type">${extension.toUpperCase()}</span>`;
+                const meta = document.createElement("div");
+                meta.className = "post-meta";
+                meta.innerHTML = `<span class="material-icons-sharp">folder</span><span>${file.source === "supabase" ? "Arsip Online" : "Arsip GitHub"}</span>`;
+                const heading = document.createElement("h3");
+                heading.textContent = name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
+                const description = document.createElement("p");
+                description.className = "post-description";
+                description.textContent = `${extension.toUpperCase()}${file.size ? " · " + formatFileSize(file.size) : ""}${file.description ? " · " + file.description : ""}`;
+                const bottom = document.createElement("div");
+                bottom.className = "post-card-bottom document-actions";
+                const view = document.createElement("a");
+                view.className = "document-button view-button";
+                view.target = "_blank"; view.rel = "noopener noreferrer";
+                view.innerHTML = `<span class="material-icons-sharp">visibility</span><span>Lihat</span>`;
+                if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(extension)) {
+                    view.href = "https://view.officeapps.live.com/op/view.aspx?src=" + encodeURIComponent(url);
+                } else { view.href = url; }
+                const download = document.createElement("a");
+                download.className = "document-button download-button";
+                download.href = url; download.target = "_blank"; download.rel = "noopener noreferrer";
+                download.setAttribute("download", name);
+                download.innerHTML = `<span class="material-icons-sharp">download</span><span>Download</span>`;
+                bottom.append(view, download);
+                card.append(top, meta, heading, description, bottom);
+                documentList.appendChild(card);
+            });
+        }
+        async function loadDocuments() {
+            documentCount.textContent = "Memuat dokumen...";
+            const docs = [];
+            const configured = window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
+                !window.SUPABASE_URL.includes("GANTI_") && !window.SUPABASE_ANON_KEY.includes("GANTI_");
+            if (configured && window.supabase) {
+                try {
+                    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+                    const { data, error } = await client.from("documents").select("*").order("created_at", { ascending: false });
+                    if (error) throw error;
+                    (data || []).forEach(function(row) {
+                        const publicData = client.storage.from("materi-tugas").getPublicUrl(row.storage_path).data;
+                        docs.push({ name: row.file_name, public_url: publicData.publicUrl, size: row.file_size,
+                            description: [row.category, row.description].filter(Boolean).join(" · "), source: "supabase" });
+                    });
+                } catch (error) { console.error("Supabase gagal dimuat:", error); }
+            }
+            try {
+                const response = await fetch(githubAssetsAPI, { headers: { "Accept": "application/vnd.github+json" } });
+                if (!response.ok) throw new Error("GitHub API: " + response.status);
+                const files = await response.json();
+                if (Array.isArray(files)) files.filter(file => file.type === "file" && supportedExtensions.includes(getFileExtension(file.name)))
+                    .forEach(file => docs.push({ name: file.name, download_url: file.download_url || file.html_url,
+                        html_url: file.html_url, size: file.size, source: "github" }));
+            } catch (error) { console.warn("Dokumen GitHub tidak dapat dimuat:", error); }
+            const seen = new Set();
+            allDocuments = docs.filter(file => { const key = (file.name || "").toLowerCase(); if (seen.has(key)) return false; seen.add(key); return true; })
+                .sort((a, b) => a.name.localeCompare(b.name));
+            renderDocuments(allDocuments);
+            if (!allDocuments.length) {
+                documentList.innerHTML = `<div class="empty-state"><div class="empty-icon"><span class="material-icons-sharp">folder_open</span></div><h3>Belum ada dokumen</h3><p>Atur Supabase atau tambahkan berkas ke folder assets di GitHub.</p><p style="margin-top:12px"><a class="post-link" href="${githubAssetsPage}" target="_blank" rel="noopener">Buka folder assets di GitHub</a></p></div>`;
+            }
+        }
+
+        /* ======================================
+           PENCARIAN DOKUMEN
+        ====================================== */
+
+        searchDocument.addEventListener("input", function () {
+            const keyword = searchDocument.value
+                .trim()
+                .toLowerCase();
+
+            const filteredDocuments = allDocuments.filter(
+                function (file) {
+                    return file.name.toLowerCase().includes(keyword);
+                }
+            );
+
+            renderDocuments(filteredDocuments);
+        });
+
+
+        /* ======================================
+           JALANKAN SAAT HALAMAN DIBUKA
+        ====================================== */
+
+        loadDocuments();
+    </script>
+
+</body>
+</html>
